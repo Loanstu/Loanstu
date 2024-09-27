@@ -1,0 +1,37 @@
+
+
+var button = [{ title : "✅CHECK" , command : "✅CHECK" }]
+Bot.sendInlineKeyboard(button , "*🛡 Subscribe to our Channel to Start the Bot and Earn from It: \n\n➤ @loanstu_updates\n\n☑️ Done Subscribed! Click ✅CHECK*")
+function hello(message) {
+var greetings = ""
+
+Bot.sendMessage(greetings + message)
+}
+
+function doTouchOwnLink() {
+Bot.sendMessage("*You're Trying to Invite Yourself ❌*")
+}
+
+function doAttracted(channel) {
+hello("Referral: " + channel)
+}
+
+function doAtractedByUser(refUser) {
+hello("")
+var balance = Libs.ResourcesLib.anotherUserRes("balance", refUser.telegramid)
+balance.add(0.5)
+Bot.sendMessageToChatWithId(refUser.chatId, "*🏧 New Referral: +0.5 ₹*");
+}
+
+function doAlreadyAttracted(){
+Bot.sendMessage("*You Already Started the Bot ❌*");
+}
+
+var trackOptions = {
+onTouchOwnLink: doTouchOwnLink,
+onAttracted: doAttracted,
+onAtractedByUser: doAtractedByUser,
+onAlreadyAttracted: doAlreadyAttracted
+}
+
+Libs.ReferralLib.currentUser.track(trackOptions);
